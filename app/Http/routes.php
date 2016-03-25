@@ -1,6 +1,4 @@
 <?php
-
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
@@ -12,6 +10,5 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::resource('user', 'UserController', [
     	'only' => ['index', 'show', 'edit', 'update', 'destroy'],
-    	'before' => 'auth'
     ]);
 });

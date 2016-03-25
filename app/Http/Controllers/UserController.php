@@ -8,8 +8,15 @@ use App\Http\Requests;
 
 use App\User;
 
+use Auth;
+
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('index', ['users' => User::all()]);
     }
 
     /**
@@ -39,6 +46,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if(Auth::user()->id !== $user->id){
+            abort('403', 'Access Denied: You do not have access to this page');
+        }
         return view('edit', ['user' => $user]);
     }
 
@@ -64,6 +74,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
