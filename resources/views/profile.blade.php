@@ -27,7 +27,7 @@
                             <div class="col-md-offset-6"><h3>{{ $user->email }}</h3></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6"><h2><u>About Me</u></h2></div>
+                            <div class="col-md-6"><h3><u>About Me</u></h3></div>
                         </div>
                         <div class="row">
                             <p><div class="col-md-6">{!! nl2br(e($user->about)) !!}</div></p>

@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use App\User;
-
 use Auth;
 
 class UserController extends Controller
@@ -49,6 +46,7 @@ class UserController extends Controller
         if(Auth::user()->id !== $user->id){
             abort('403', 'Access Denied: You do not have access to this page');
         }
+
         return view('edit', ['user' => $user]);
     }
 
@@ -69,11 +67,15 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        
+        $user->delete();
+
+        Auth::logout();
+
+        return view('welcome');
     }
 }

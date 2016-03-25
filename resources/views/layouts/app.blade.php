@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>µDb</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -40,7 +40,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    µDb
                 </a>
             </div>
 
@@ -48,6 +48,10 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    @unless (Auth::guest())
+                        <li><a href="{{ url('/user') }}">Users</a></li>
+                        <li><a href="{{ url('user/' . Auth::user()->id) }}">Profile</a></li>
+                    @endunless
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -64,6 +68,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/user/' . Auth::user()->id . '/edit') }}"><i class="fa fa-btn fa-user"></i>Edit Profile</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
                     @endif
