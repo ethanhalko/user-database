@@ -76,7 +76,7 @@
             </div>
         </div>
     </nav>
-
+    <pre>{{var_dump($errors)}}</pre>
     @yield('content')
 
     <!-- JavaScripts -->

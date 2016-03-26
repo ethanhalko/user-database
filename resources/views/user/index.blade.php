@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <ul class="list-group">
                     @foreach($users as $user)
-                        <li class="list-group-item"><a href="/user/{{ $user->id }}">{{ $user->name }} - {{ $user->location }}</a></li>
+                        <li class="list-group-item"><a href="{{route('user.show', ['user' => $user->id])}}">{{ $user->name }} - {{ $user->location }}</a></li>
                     @endforeach
                     </ul>
                 </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use Auth;
+use Session;
 
 class UserController extends Controller
 {
@@ -21,7 +22,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('index', ['users' => User::all()]);
+        return view('user.index', ['users' => User::all()]);
     }
 
     /**
@@ -32,7 +33,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('profile', ['user' => $user]);
+        return view('user.profile', ['user' => $user]);
     }
 
     /**
@@ -43,11 +44,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        if(Auth::user()->id !== $user->id){
-            abort('403', 'Access Denied: You do not have access to this page');
-        }
+        $this->checkUser($user);
 
-        return view('edit', ['user' => $user]);
+        return view('user.edit', ['user' => $user]);
     }
 
     /**
@@ -59,9 +58,16 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->validate( $request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+        ]);
+
+        $this->checkUser($user);
+
         $user->update($request->all());
 
-        return view('profile', ['user' => $user]);
+        return view('user.profile', ['user' => $user]);
     }
 
     /**
@@ -72,10 +78,17 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->checkUser($user);
         $user->delete();
 
         Auth::logout();
 
         return view('welcome');
+    }
+
+    protected function checkUser( User $user ){
+        if(Auth::user()->id !== $user->id){
+            abort('403', 'Access Denied: You do not have access to this page.');
+        }
     }
 }

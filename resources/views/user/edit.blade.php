@@ -8,7 +8,7 @@
                 <div class="panel-heading">Edit Your Profile</div>
                 <div class="panel-body">
                     <div class="col-md-6">
-                        <form method="POST" action="/user/{{$user->id}}">
+                        <form method="POST" action="{{route('user.update', ['user' => $user->id])}}">
                             {{ method_field('PATCH') }}
                             <input type="hidden" name="_token" value="{{{ csrf_token() }}}">
                                 <div class="row">
@@ -34,11 +34,11 @@
                                     <button type="submit" class="btn btn-primary pull-left">Save</button>
                                 </div>
                         </form>
-                        <form method="POST" action="/user/{{$user->id}}">
+                        <form method="POST" action="{{route('user.update', ['user' => $user->id])}}">
                             <div class="row">
                                 <input type="hidden" name="_token" value="{{{ csrf_token() }}}">
                                 {{ method_field('DELETE') }}
-                                <button type="submit" class="btn btn-danger pull-left confirmation">Delete Profile</button>
+                                <button type="submit" class="btn btn-danger pull-right confirmation">Delete Profile</button>
                             </div>
                         </form>
                     </div>
