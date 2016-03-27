@@ -12,11 +12,18 @@
                             {{ method_field('PATCH') }}
                             <input type="hidden" name="_token" value="{{{ csrf_token() }}}">
                                 <div class="row">
-                                    <label class="pull-left" for="first-name">Name</label>
+                                    <label class="pull-left" for="first-name">Name:</label>
                                     <input class="pull-right" type="text" name="name" id="name" value="{{$user->name}}">
                                 </div>
                                 <div class="row">
-                                    <label class="pull-left" for="location">Location</label>
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="row">
+                                    <label class="pull-left" for="location">Location:</label>
                                     <input class="pull-right" type="text" name="location" id="location" value="{{$user->location}}">
                                 </div>
                                 <div class="row">
@@ -24,10 +31,17 @@
                                     <input class="pull-right" type="text" name="email" id="email" value="{{$user->email}}">
                                 </div>
                                 <div class="row">
-                                    <label class="pull-left" for="about">About Me</label>
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif                                
                                 </div>
                                 <div class="row">
-                                    <textarea class="pull-left" name="about" id="about" style="width: 100%;">{{$user->about}}</textarea>
+                                    <label class="pull-left" for="about">About Me:</label>
+                                </div>
+                                <div class="row">
+                                    <textarea class="pull-left" name="about" id="about" style="width: 100%; height:200px;">{{$user->about}}</textarea>
                                 </div>
                                 <br>
                                 <div class="row">

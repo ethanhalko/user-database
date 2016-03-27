@@ -47,10 +47,10 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
                     @unless (Auth::guest())
-                        <li><a href="{{ url('/user') }}">Users</a></li>
-                        <li><a href="{{ url('user/' . Auth::user()->id) }}">Profile</a></li>
+                        <li><a href="{{ route('user.index') }}">Users</a></li>
+                        <li><a href="{{ route('user.show', ['user' => Auth::user()->id]) }}">Profile</a></li>
                     @endunless
                 </ul>
 
@@ -67,7 +67,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/user/' . Auth::user()->id . '/edit') }}"><i class="fa fa-btn fa-user"></i>Edit Profile</a></li>
+                                <li><a href="{{ route('user.edit', ['user' => Auth::user()->id]) }}"><i class="fa fa-btn fa-user"></i>Edit Profile</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
@@ -76,7 +76,7 @@
             </div>
         </div>
     </nav>
-    <pre>{{var_dump($errors)}}</pre>
+
     @yield('content')
 
     <!-- JavaScripts -->
