@@ -60,11 +60,10 @@ class UserController extends Controller
     {
         $this->validate( $request, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
         ]);
 
         $this->checkUser($user);
-
         $user->update($request->all());
 
         return view('user.profile', ['user' => $user]);
