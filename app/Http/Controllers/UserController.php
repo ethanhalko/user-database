@@ -57,9 +57,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $this->validate( $request, [
+        $this->validate($request, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
         ]);
 
         $this->checkUser($user);
@@ -84,8 +84,9 @@ class UserController extends Controller
         return view('welcome');
     }
 
-    protected function checkUser( User $user ){
-        if(Auth::user()->id !== $user->id){
+    protected function checkUser(User $user)
+    {
+        if (Auth::user()->id !== $user->id) {
             abort('403', 'Access Denied: You do not have access to this page.');
         }
     }

@@ -8,5 +8,5 @@ Route::get('/', function () {
 Route::get('/home', ['uses' => 'HomeController@index', 'as' => 'home']);
 
 Route::resource('user', 'UserController', [
-	'only' => ['index', 'show', 'edit', 'update', 'destroy'],
+    'only' => ['index', 'show', 'edit', 'update', 'destroy'],
 ]);
